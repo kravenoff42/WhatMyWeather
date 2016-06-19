@@ -13,12 +13,12 @@ $.getJSON(location, function(data) {
       var icon_replace = $("#icon").attr("src");
       $("#city").html(data.name);
 
-      var tempF = Math.round(((data.main.temp) * 9 / 5 - 459.67));
+      var tempF = Math.round(data.main.temp * 9 / 5 - 459.67);
       var description = data.weather[0].description;
       var cDescription = description.charAt(0).toUpperCase() + description.slice(1);
     $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
         {
-            tags: description,
+            tags: description +', nature',
             tagmode: "all",
             format: "json"
         },
@@ -34,7 +34,7 @@ $.getJSON(location, function(data) {
       $("#icon").attr("src", icon_replace.replace("#", "http://openweathermap.org/img/w/" + icon + ".png"));
 
 
-      $("#temp").html(tempF + "°F");
+      $("#temp").html(tempF + '\xB0F');
       $("#desc").html(cDescription);
 
 
